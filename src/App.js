@@ -11,6 +11,9 @@ import ModalNoticia from './components/ModalNoticia';
 import PrivateRoute from './components/PrivateRoute';
 import Usuarios from './components/Usuarios';
 import NoticiasAdmin from './components/noticiasadmin';
+import Comentarios from './components/Comentarios';
+import Envivo from './components/Envivo';
+import Cuenta from './components/Cuenta';
 import Sidebar from './components/Sidebar';
 import AuthModals from './components/AuthModals'; // Importa el componente de modales de autenticación
 import NoticiasMasLeidas from './components/NoticiasMasLeidas';
@@ -42,7 +45,8 @@ const App = () => {
     const categoryTitles = {
         home: "Todas las Noticias",
         politica: "Política",
-        deportes: "Deportes"
+        deportes: "Deportes",
+        internacionales: "Internacionales"
     };
 
     useEffect(() => {
@@ -181,7 +185,12 @@ const App = () => {
                         <Route path="/" element={
                             <div className="bg-gray-100 min-h-screen">
                                 <div className="flex pt-24">
+                                <div className="flex flex-col w-full md:w-1/4">
                                     <Partidos partidos={partidos} />
+
+                                    {/* Comentarios debajo de Próximos Partidos */}
+                                    <Comentarios userRole={userRole} />
+                                </div>
                                     <Noticias 
                                         category={category}
                                         noticias={filteredNoticias}
@@ -201,12 +210,39 @@ const App = () => {
                                     <Posiciones posiciones={posiciones} />
                                 </div>
                                 {/* <NoticiasMasLeidas noticias={noticiasMasLeidas} /> Añade el componente aquí */}
-                                <RadioPlayer />
+                                <RadioPlayer userRole={userRole} />
+                                
                             </div>
                         } />
-                        <Route path="/dashboard" element={<PrivateRoute userRole={userRole}><Dashboard /></PrivateRoute>} />
-                        <Route path="/usuarios" element={<PrivateRoute userRole={userRole}><Usuarios /></PrivateRoute>} />
-                        <Route path="/noticiasadmin" element={<PrivateRoute userRole={userRole}><NoticiasAdmin /></PrivateRoute>} />
+                        <Route path="/dashboard" 
+        element={
+            <PrivateRoute userRole={userRole} allowedRoles={[1, 2]}>
+                <Dashboard />
+            </PrivateRoute>
+        } 
+    />
+    <Route path="/usuarios" 
+        element={
+            <PrivateRoute userRole={userRole} allowedRoles={[1, 2]}>
+                <Usuarios />
+            </PrivateRoute>
+        } 
+    />
+    <Route path="/noticiasadmin" 
+        element={
+            <PrivateRoute userRole={userRole} allowedRoles={[1, 2]}>
+                <NoticiasAdmin />
+            </PrivateRoute>
+        } 
+    />
+    <Route path="/cuenta" 
+        element={
+            <PrivateRoute userRole={userRole} allowedRoles={[3, 4, 5]}>
+                <Cuenta />
+            </PrivateRoute>
+        } 
+    />
+    <Route path="/envivo" element={<Envivo />} />
                     </Routes>
                     <ModalNoticia selectedNoticia={selectedNoticia} closeModal={closeModal} categoryTitle={categoryTitles[category]} />
                 </div>

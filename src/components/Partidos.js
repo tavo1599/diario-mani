@@ -3,7 +3,7 @@ import React from 'react';
 
 const Partidos = ({ partidos }) => {
     return (
-        <div className="w-1/4 p-4 pl-24">
+        <div className="bg-white shadow rounded p-4 ml-9">
             <h2 className="text-xl font-bold mb-4">Próximos Partidos</h2>
             {partidos.length > 0 ? (
                 partidos.map((partido, index) => (

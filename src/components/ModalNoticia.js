@@ -45,6 +45,9 @@ const ModalNoticia = ({ selectedNoticia, closeModal, categoryTitle }) => {
                 <p className="text-sm text-gray-500 mt-4">
                     {new Date(selectedNoticia.fecha).toLocaleDateString('es-ES', { day: '2-digit', month: 'long', year: 'numeric' })}
                 </p>
+                <p className="text-xs text-blue-600 mt-2">
+                                Fuente: <span className="font-medium">{selectedNoticia.fuente}</span>
+                            </p>
             </div>
         </div>
     );

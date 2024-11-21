@@ -141,17 +141,20 @@ const Noticias = ({
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                         {filteredNoticias.slice(1, visibleNoticias).map((noticia, index) => (
                             <div
-                                key={index}
-                                className="bg-white p-4 rounded-lg shadow-md cursor-pointer transition duration-300 hover:shadow-lg"
-                                onClick={() => openModal(noticia)}
-                            >
-                                <img src={noticia.image} alt={noticia.titulo} className="w-full h-32 object-cover rounded-md" />
-                                <h3 className="font-semibold mt-2">{noticia.titulo}</h3>
-                                <p className="text-gray-600 text-sm mt-1">{noticia.descripcion.slice(0, 100)}...</p>
-                                <p className="text-sm text-gray-500 mt-1">
-                                    {new Date(noticia.fecha).toLocaleDateString('es-ES', { day: '2-digit', month: 'long', year: 'numeric' })}
-                                </p>
-                            </div>
+                            key={index}
+                            className="bg-white p-4 rounded-lg shadow-md cursor-pointer transition duration-300 hover:shadow-lg"
+                            onClick={() => openModal(noticia)}
+                        >
+                            <img src={noticia.image} alt={noticia.titulo} className="w-full h-32 object-cover rounded-md" />
+                            <h3 className="font-semibold mt-2">{noticia.titulo}</h3>
+                            <p className="text-gray-600 text-sm mt-1">{noticia.descripcion.slice(0, 100)}...</p>
+                            <p className="text-sm text-gray-500 mt-1">
+                                {new Date(noticia.fecha).toLocaleDateString('es-ES', { day: '2-digit', month: 'long', year: 'numeric' })}
+                            </p>
+                            <p className="text-xs text-blue-600 mt-2">
+                                Fuente: <span className="font-medium">{noticia.fuente}</span>
+                            </p>
+                        </div>
                         ))}
                     </div>
 

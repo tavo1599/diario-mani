@@ -1,5 +1,5 @@
-// components/AuthModals.js
 import React from 'react';
+import axios from 'axios'; // Asegúrate de tener axios importado
 import logo from '../assets/Diario-r.png';
 
 const AuthModals = ({ 
@@ -8,7 +8,6 @@ const AuthModals = ({
     toggleLoginModal, 
     toggleRegisterModal, 
     handleLogin, 
-    handleRegister, 
     username, 
     setUsername, 
     password, 
@@ -16,6 +15,21 @@ const AuthModals = ({
     email, 
     setEmail 
 }) => {
+    const handleRegister = async () => {
+        try {
+            const response = await axios.post('http://localhost:5000/api/register', {
+                nombre: username,
+                email: email,
+                contrasena: password,
+            });
+            alert(response.data.message); // Muestra el mensaje de éxito
+            toggleRegisterModal(); // Cierra el modal
+        } catch (error) {
+            console.error('Error al registrar el usuario:', error);
+            alert(error.response?.data?.error || 'Error en el servidor'); // Muestra un error
+        }
+    };
+
     return (
         <>
             {/* Login Modal */}
